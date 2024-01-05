@@ -1,0 +1,660 @@
+{%extends "base.html"%}
+{%block title %}Admin Page{%endblock%}
+{% block content %}
+
+<form method="POST" onsubmit="return validatePatientInfoForm()" style="display: inline-block;">
+    <h3>View Patient Info</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="Patient_Name">Patient Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Patient_Name"
+        name="Patient_Name"
+        placeholder="Enter Patient Name"
+        style="width: 200px;"
+      />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="DateOfBirth">Date of Birth:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="DateOfBirth"
+        name="DateOfBirth"
+        placeholder="Enter Date of Birth"
+        style="width: 200px;"
+      />
+    </div>
+    <br />
+    <input type="hidden" name="action" value="search_view_patient_general_info">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Search</button>
+</form>
+
+<form method="POST" style="display: inline-block; margin-right: 40%;">
+    <br />
+    <input type="hidden" name="action" value="view-appointment">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 0.001%;">View Appointments</button>
+</form>
+
+<!-- def add_patient_info(AID, APW, newName, newEmail, newEmerg, newDOB) -->
+<form method="POST"  style="display: inline-block; margin-top: 5%">
+  <h3>Add Patient Info</h3>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+    <label for="AdminID">AdminID:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="AdminID"
+      name="AdminID"
+      placeholder="Enter AdminID"
+      style="width: 200px;"
+    />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+    <label for="Admin_Password">Admin Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="Admin_Password"
+      name="Admin_Password"
+      placeholder="Enter Admin Password"
+      style="width: 200px;"
+    />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="New_Name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="New_Name"
+        name="New_Name"
+        placeholder="Enter New Name"
+        style="width: 200px;"
+      />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="New_Email">Email:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="New_Email"
+        name="New_Email"
+        placeholder="Enter New Email"
+        style="width: 200px;"
+      />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="New_Emerg">Emerg:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="New_Emerg"
+        name="New_Emerg"
+        placeholder="Enter New Emerg"
+        style="width: 200px;"
+      />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="New_DOB">Date of Birth:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="New_DOB"
+        name="New_DOB"
+        placeholder="Enter New DOB"
+        style="width: 200px;"
+      />
+  </div>
+  
+  <br />
+  <input type="hidden" name="action" value="add-patient-info">
+  <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Add</button>
+</form>
+
+<!-- def update_patient_info(AID, APW, pNo, newName, newEmail, newEmerg, newDOB) -->
+<form method="POST"  style="display: inline-block; margin-top: 5%">
+    <h3>Update Patient Info</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="AdminID">AdminID:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="AdminID"
+        name="AdminID"
+        placeholder="Enter AdminID"
+        style="width: 200px;"
+      />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+      <label for="Admin_Password">Admin Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Admin_Password"
+        name="Admin_Password"
+        placeholder="Enter Admin Password"
+        style="width: 200px;"
+      />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Patient_Number">Patient Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Patient_Number"
+          name="Patient_Number"
+          placeholder="Enter Patient Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Name">New Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Name"
+          name="New_Name"
+          placeholder="Enter New Name"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Email">New Email:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Email"
+          name="New_Email"
+          placeholder="Enter New Email"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Emerg">New Emerg:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Emerg"
+          name="New_Emerg"
+          placeholder="Enter New Emerg"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_DOB">New Date of Birth:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_DOB"
+          name="New_DOB"
+          placeholder="Enter New DOB"
+          style="width: 200px;"
+        />
+    </div>
+    
+    <br />
+    <input type="hidden" name="action" value="update-patient-info">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Update</button>
+</form>
+
+<!-- def updatePatientInsurance(AID, APW, pNo, newPolNo, newStartDate, newDent, newDrug, newHealth)-->
+<form method="POST"  style="display: inline-block; margin-top: 5%">
+    <h3>Update Patient Insurance</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Patient_Number">Patient Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Patient_Number"
+          name="Patient_Number"
+          placeholder="Enter Patient Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Policy_Number">New Policy Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Policy_Number"
+          name="New_Policy_Number"
+          placeholder="Enter New Policy Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Start_Date">New Start Date:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Start_Date"
+          name="New_Start_Date"
+          placeholder="Enter New Start Date"
+          style="width: 200px;"
+        />
+    </div>
+
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Dental">New Dental:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Dental"
+          name="New_Dental"
+          placeholder="Enter New Dental"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Drug">New Drug:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Drug"
+          name="New_Drug"
+          placeholder="Enter New Drug"
+          style="width: 200px;"
+        />
+    </div>
+
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Health">New Health:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Health"
+          name="New_Health"
+          placeholder="Enter New Health"
+          style="width: 200px;"
+        />
+    </div>
+    <br />
+    <input type="hidden" name="action" value="update-patient-insurance">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Update</button>
+</form>
+
+<!--def make_appointment(AID, APW, pNo, dID, dateIn, timeIn)-->
+<form method="POST"  style="display: inline-block; margin-top: 5%">
+    <h3>Make Appointment</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Patient_Number">Patient Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Patient_Number"
+          name="Patient_Number"
+          placeholder="Enter Patient Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="DoctorID">DoctorID:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="DoctorID"
+          name="DoctorID"
+          placeholder="Enter DoctorID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Date">Date:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Date"
+          name="Date"
+          placeholder="Enter Date"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Time">Time:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Time"
+          name="Time"
+          placeholder="Enter Time"
+          style="width: 200px;"
+        />
+    </div>
+    <br />
+    <input type="hidden" name="action" value="make-appointment">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Make</button>
+</form>
+
+<!--def delete_appointment(AID, APW, apptNo)-->
+<form method="POST" style="display: inline-block; margin-top: 5%">
+    <h3>Delete Appointment</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Appointment_Number">Appointment Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Appointment_Number"
+          name="Appointment_Number"
+          placeholder="Enter Appointment Number"
+          style="width: 200px;"
+        />
+    </div>
+    
+    <br />
+    <input type="hidden" name="action" value="delete-appointment">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Delete</button>
+</form>
+
+<!-- def reschedule_appointment(AID, APW, apptNo, dID, newDate, newTime)  -->
+<form method="POST" style="display: inline-block; margin-top: 5%">
+    <h3>Reschedule Appointment</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Appointment_Number">Appointment Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Appointment_Number"
+          name="Appointment_Number"
+          placeholder="Enter Appointment Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="DoctorID">DoctorID:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="DoctorID"
+          name="DoctorID"
+          placeholder="Enter DoctorID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Date">New Date:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Date"
+          name="New_Date"
+          placeholder="Enter New Date"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="New_Time"> New Time:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="New_Time"
+          name="New_Time"
+          placeholder="Enter New Time"
+          style="width: 200px;"
+        />
+    </div>
+    <br />
+    <input type="hidden" name="action" value="reschedule-appointment">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Reschedule</button>
+</form>
+
+<!-- assign_nurse_to_patient --- 4 args  -->
+<form method="POST" style="display: inline-block; margin-top: 5%">
+    <h3>Assign Nurse to Patient</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="NurseID">NurseID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="NurseID"
+          name="NurseID"
+          placeholder="Enter NurseID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Patient_Number">Patient Number:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Patient_Number"
+          name="Patient_Number"
+          placeholder="Enter Patient Number"
+          style="width: 200px;"
+        />
+    </div>
+
+    <br />
+    <input type="hidden" name="action" value="assign-nurse-to-patient">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Assign</button>
+</form>
+
+<!-- update doctor info --- 8 args  -->
+<form method="POST"  style="display: inline-block; margin-top: 5%">
+    <h3>Update Doctor Info</h3>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="AdminID">AdminID:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="AdminID"
+          name="AdminID"
+          placeholder="Enter AdminID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Admin_Password">Admin Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="Admin_Password"
+          name="Admin_Password"
+          placeholder="Enter Admin Password"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="DoctorID">DoctorID:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="DoctorID"
+          name="DoctorID"
+          placeholder="Enter DoctorID"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Email">Email:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Email"
+          name="Email"
+          placeholder="Enter Email"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="First_Name">First Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="First_Name"
+          name="First_Name"
+          placeholder="Enter First Name"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Last_Name">Last Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Last_Name"
+          name="Last_Name"
+          placeholder="Enter Last_Name"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Department_Number"> Department Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Department_Number"
+          name="Department_Number"
+          placeholder="Enter Department Number"
+          style="width: 200px;"
+        />
+    </div>
+    <div class="form-group" style="display: inline-block; margin-right: 10px;">
+        <label for="Doctor_Hours">Doctor Hours:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Doctor_Hours"
+          name="Doctor_Hours"
+          placeholder="Enter Doctor Hours"
+          style="width: 200px;"
+        />
+    </div>
+    <br />
+    <input type="hidden" name="action" value="update-doctor-information">
+    <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Update</button>
+</form>
+<script>
+    function validatePatientInfoForm() {
+        var patientName = document.getElementById("Patient_Name").value;
+        var dateOfBirth = document.getElementById("DateOfBirth").value;
+
+        // Validate Patient Name format (name lastname)
+        var nameRegex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
+        if (!nameRegex.test(patientName)) {
+            alert("Please enter a valid Patient Name in the format 'Name Lastname'");
+            return false;
+        }
+
+        // Validate Date of Birth format (yyyy-mm-dd)
+        var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(dateOfBirth)) {
+            alert("Please enter a valid Date of Birth in the format 'yyyy-mm-dd'");
+            return false;
+        }
+
+        // Form is valid, allow submission
+        return true;
+    }
+</script>
+{% endblock %}
