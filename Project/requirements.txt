@@ -1,0 +1,4 @@
+flask
+flask-login
+mysql-connector-python==8.2.0
+protobuf==4.21.12

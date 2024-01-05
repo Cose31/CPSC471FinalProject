@@ -1,0 +1,66 @@
+{%extends "base.html"%}
+{% block title %}Nurse Page{% endblock %}
+{% block content%}
+<form method="POST" onsubmit="return validatePatientInfoForm()" style="display: inline-block;">
+  <h3>View Patient Info</h3>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+    <label for="Patient_Name">Patient Name:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Patient_Name"
+      name="Patient_Name"
+      placeholder="Enter Patient Name"
+      style="width: 200px;"
+    />
+  </div>
+  <div class="form-group" style="display: inline-block; margin-right: 10px;">
+    <label for="DateOfBirth">Date of Birth:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="DateOfBirth"
+      name="DateOfBirth"
+      placeholder="Enter Date of Birth"
+      style="width: 200px;"
+    />
+  </div>
+  <br />
+  <input type="hidden" name="action" value="search_view_patient_general_info">
+  <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Search</button>
+</form>
+
+<form method="POST" style="display: inline-block; margin-right: 40%;">
+  <br />
+  <input type="hidden" name="action" value="view-appointment">
+  <button type="submit" class="btn btn-primary" style="display: inline-block; margin-right: 0.001%;">View Appointments</button>
+</form>
+
+
+
+
+
+<script>
+  function validatePatientInfoForm() {
+      var patientName = document.getElementById("Patient_Name").value;
+      var dateOfBirth = document.getElementById("DateOfBirth").value;
+
+      // Validate Patient Name format (name lastname)
+      var nameRegex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
+      if (!nameRegex.test(patientName)) {
+          alert("Please enter a valid Patient Name in the format 'Name Lastname'");
+          return false;
+      }
+
+      // Validate Date of Birth format (yyyy-mm-dd)
+      var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(dateOfBirth)) {
+          alert("Please enter a valid Date of Birth in the format 'yyyy-mm-dd'");
+          return false;
+      }
+
+      // Form is valid, allow submission
+      return true;
+  }
+</script>
+  {% endblock %}
